@@ -16,16 +16,18 @@ There are still onboarding issues with crypto, especially for users unfamiliar w
 
 ## Project Demo Photos, Videos
 
-- [Demo Video](#)
+- [Demo Video](https://www.loom.com/share/e61cc6da49a743deaef37cc0148f8fa1)
 - ![Placeholder Image](#)
 
 ## Live Project Link
 
-[Live Project](#)
+[Live Project](https://cardanocodex-2024.vercel.app/create)
+https://cardanocodex-2024.vercel.app/create
 
 ## PPT Link
 
-[Presentation](#)
+[Presentation](https://gamma.app/docs/Relink-Revolutionizing-Crypto-Transfers-24d6zegm2lfuz3q)
+
 
 ## Team Members
 
