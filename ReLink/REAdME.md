@@ -10,7 +10,7 @@ There are still onboarding issues with crypto, especially for users unfamiliar w
 
 ## Tech Stack Used
 
-- **Next.js** for documentation
+- **Markdown** for documentation
 - **Next.js** for the website
 - **Aiken** for validator functions
 
