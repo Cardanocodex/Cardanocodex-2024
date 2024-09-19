@@ -17,7 +17,14 @@ There are still onboarding issues with crypto, especially for users unfamiliar w
 ## Project Demo Photos, Videos
 
 - [Demo Video](https://www.loom.com/share/e61cc6da49a743deaef37cc0148f8fa1)
-- ![Placeholder Image](#)
+- <img width="766" alt="Screenshot 2024-09-19 at 11 24 06 PM" src="https://github.com/user-attachments/assets/efc5909d-7bb4-423f-a129-ea940111a54d">
+- <img width="766" alt="Screenshot 2024-09-19 at 11 24 06 PM" src="https://github.com/user-attachments/assets/3974a689-e320-4fe5-bfd5-2fc9df36d66f">
+
+
+
+- <img width="749" alt="Screenshot 2024-09-19 at 11 32 02 PM" src="https://github.com/user-attachments/assets/7501bde1-a88d-4226-9a97-66905a37b577">
+
+
 
 ## Live Project Link
 
