@@ -17,6 +17,14 @@ There are still onboarding issues with crypto, especially for users unfamiliar w
 ## Project Demo Photos, Videos
 
 - [Demo Video](https://www.loom.com/share/e61cc6da49a743deaef37cc0148f8fa1)
+
+<a href="https://www.loom.com/share/6092f545861d45a6b1387f8af7dd1f63">
+      <p>Library | Loom - 19 September 2024 - Watch Video</p>
+</a>
+<a href="https://www.loom.com/share/6092f545861d45a6b1387f8af7dd1f63">
+      <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/6092f545861d45a6b1387f8af7dd1f63-790e4a5bbda023dd-full-play.gif">
+</a>
+
 - <img width="766" alt="Screenshot 2024-09-19 at 11 24 06 PM" src="https://github.com/user-attachments/assets/efc5909d-7bb4-423f-a129-ea940111a54d">
 - <img width="766" alt="Screenshot 2024-09-19 at 11 24 06 PM" src="https://github.com/user-attachments/assets/3974a689-e320-4fe5-bfd5-2fc9df36d66f">
 
