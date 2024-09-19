@@ -172,7 +172,7 @@ function CreateLinkForm({
     } else {
       toast.error("Transaction failed");
     }
-    const url = new URL("http://localhost:3000/redeem");
+    const url = new URL(`${window.location.origin}/redeem`);
     url.searchParams.append("k", newWallet.key);
     url.searchParams.append("oi", txSigned.outputIndex.toString());
     url.searchParams.append("oh", txSigned.txHash);
