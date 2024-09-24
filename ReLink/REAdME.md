@@ -46,5 +46,5 @@ https://cardanocodex-2024.vercel.app/create
 
 ## Team Members
 
-- **Dipanshu Singh** Telegram @dipanshuhappy
+- **Dipanshu Singh** Telegram @agentDPS
 - **Mudassir**
