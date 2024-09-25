@@ -3,11 +3,12 @@
 	import signature from '$lib/assets/signature.png';
 
 	import JsBarcode from 'jsbarcode';
-	import { afterUpdate } from 'svelte';
+	import { afterUpdate, onMount } from 'svelte';
 	import html2canvas from 'html2canvas';
 
 	import toast from 'svelte-french-toast';
 	import { userNameStore, walletStore } from '$lib/store';
+	import { goto } from '$app/navigation';
 
 	let rollNo = '24AI' + Math.floor(Math.random() * 10);
 
@@ -23,6 +24,12 @@
 			});
 		}
 	});
+
+	onMount(() => {
+		if($userNameStore){
+			goto("/")
+		}
+	})
 </script>
 
 <div class="actions-container">
