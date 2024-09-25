@@ -4,7 +4,7 @@ import ora from "ora";
 import { sleep } from "./utils.js";
 
 export async function mint(number: number) {
-  const oracleName = `CampusChampionsDID${number}`;
+  const oracleName = `DID${number}`;
 
   const mintingOracle = ora("Minting Oracle DID to your wallet").start();
 
