@@ -13,10 +13,10 @@ DeFi platforms, while promising, often pose a steep learning curve for new users
 - **AI Integration:** OpenAI for leveraging advanced Large Language Models to provide insightful analytics
 
 # Demo
-[Watch the demo video](/demo.mp4)
+[Watch the demo video](/Aruthra/demo.mp4)
 
 # PPT Presentation
-[Download](./presentation.pptx)
+[Download](/Aruthra/Anytime DeFi Teller AI.pptx)
 
 # Team
 - **Aruthra S**
