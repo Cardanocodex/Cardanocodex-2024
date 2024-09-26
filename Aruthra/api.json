@@ -1,0 +1,3363 @@
+{
+    "paths": {
+        "/address/info": {
+            "get": {
+                "description": "Get address payment credential and stake address, along with its current aggregate lovelace and multi asset balance. Either `address` or `paymentCred` can be provided, but one must be provided.",
+                "parameters": [
+                    {
+                        "description": "Address to query for",
+                        "in": "query",
+                        "name": "address",
+                        "required": false,
+                        "schema": {
+                            "example": "addr1q9j5jqhqak5nmqphdqt4cj9kq0gppa49afyznggw03hjzhwxr0exydkt78th5wwrjphxh0h6rrgghzwxse6q3pdf9sxqkg2mmq",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Payment credential to query for",
+                        "in": "query",
+                        "name": "paymentCred",
+                        "required": false,
+                        "schema": {
+                            "example": "654902e0eda93d803768175c48b603d010f6a5ea4829a10e7c6f215d",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/onchain_address_info"
+                                }
+                            }
+                        },
+                        "description": "Address info"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Address info",
+                "tags": [
+                    "Onchain \u00bb Address"
+                ]
+            }
+        },
+        "/address/utxos": {
+            "get": {
+                "description": "Get current UTxOs at an address/payment credential. Either `address` or `paymentCred` can be provided, but one must be provided.",
+                "parameters": [
+                    {
+                        "description": "Address to query for",
+                        "in": "query",
+                        "name": "address",
+                        "required": false,
+                        "schema": {
+                            "example": "addr1q9j5jqhqak5nmqphdqt4cj9kq0gppa49afyznggw03hjzhwxr0exydkt78th5wwrjphxh0h6rrgghzwxse6q3pdf9sxqkg2mmq",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Payment credential to query for",
+                        "in": "query",
+                        "name": "paymentCred",
+                        "required": false,
+                        "schema": {
+                            "example": "654902e0eda93d803768175c48b603d010f6a5ea4829a10e7c6f215d",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "This endpoint supports pagination. Default page is `1`.",
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "schema": {
+                            "example": 1,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Specify how many items to return per page. Maximum is `100`, default is `100`.",
+                        "in": "query",
+                        "name": "perPage",
+                        "required": false,
+                        "schema": {
+                            "example": 100,
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/onchain_address_utxos"
+                                }
+                            }
+                        },
+                        "description": "Address UTxOs"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Address UTxOs",
+                "tags": [
+                    "Onchain \u00bb Address"
+                ]
+            }
+        },
+        "/asset/supply": {
+            "get": {
+                "description": "Get onchain supply for a token.",
+                "parameters": [
+                    {
+                        "description": "Token unit (policy + hex name) to filter by",
+                        "in": "query",
+                        "name": "unit",
+                        "required": true,
+                        "schema": {
+                            "example": "8fef2d34078659493ce161a6c7fba4b56afefa8535296a5743f6958741414441",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/onchain_asset_supply"
+                                }
+                            }
+                        },
+                        "description": "Asset supply"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Asset supply",
+                "tags": [
+                    "Onchain \u00bb Asset"
+                ]
+            }
+        },
+        "/metrics": {
+            "get": {
+                "description": "Get the number of requests made by day over the last 30d.",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/metrics"
+                                }
+                            }
+                        },
+                        "description": "Number of requests"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Number of requests",
+                "tags": [
+                    "Metrics"
+                ]
+            }
+        },
+        "/nft/asset/sales": {
+            "get": {
+                "description": "Get a specific asset\u0027s sale history.",
+                "parameters": [
+                    {
+                        "description": "The policy ID for the collection.",
+                        "in": "query",
+                        "name": "policy",
+                        "required": true,
+                        "schema": {
+                            "example": "40fa2aa67258b4ce7b5782f74831d46a84c59a0ff0c28262fab21728",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The name of a specific NFT to get stats for.",
+                        "in": "query",
+                        "name": "name",
+                        "required": false,
+                        "schema": {
+                            "example": "ClayNation3725",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/market_nft_asset_sales"
+                                }
+                            }
+                        },
+                        "description": "NFT Sale History."
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "NFT sale history",
+                "tags": [
+                    "Market \u00bb NFTs"
+                ]
+            }
+        },
+        "/nft/asset/stats": {
+            "get": {
+                "description": "Get high-level stats on a certain NFT asset.",
+                "parameters": [
+                    {
+                        "description": "The policy ID for the collection.",
+                        "in": "query",
+                        "name": "policy",
+                        "required": true,
+                        "schema": {
+                            "example": "40fa2aa67258b4ce7b5782f74831d46a84c59a0ff0c28262fab21728",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The name of a specific NFT to get stats for.",
+                        "in": "query",
+                        "name": "name",
+                        "required": true,
+                        "schema": {
+                            "example": "ClayNation3725",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/market_nft_asset_stats"
+                                }
+                            }
+                        },
+                        "description": "NFT stats"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "NFT stats",
+                "tags": [
+                    "Market \u00bb NFTs"
+                ]
+            }
+        },
+        "/nft/asset/traits": {
+            "get": {
+                "description": "Get a specific NFT\u0027s traits and trait prices.",
+                "parameters": [
+                    {
+                        "description": "The policy ID for the collection.",
+                        "in": "query",
+                        "name": "policy",
+                        "required": true,
+                        "schema": {
+                            "example": "40fa2aa67258b4ce7b5782f74831d46a84c59a0ff0c28262fab21728",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The name of a specific NFT to get stats for.",
+                        "in": "query",
+                        "name": "name",
+                        "required": true,
+                        "schema": {
+                            "example": "ClayNation3725",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Include trait prices or not, Options are `0`, `1`. Default is `1`.",
+                        "in": "query",
+                        "name": "prices",
+                        "required": false,
+                        "schema": {
+                            "example": 0,
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/market_nft_asset_traits"
+                                }
+                            }
+                        },
+                        "description": "NFT traits."
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "NFT traits",
+                "tags": [
+                    "Market \u00bb NFTs"
+                ]
+            }
+        },
+        "/nft/collection/assets": {
+            "get": {
+                "description": "Get all NFTs from a collection with the ability to sort by price/rank and filter to specific traits.\nCategories and traits can be searched for by adding query params ex:(`policy=abc\u0026hair=white,black\u0026background=red`),\nyou can have any combination of categories and traits ex:(`policy=abc\u0026hair=blonde\u0026background=blue`)\n",
+                "parameters": [
+                    {
+                        "description": "The policy ID for the collection.",
+                        "in": "query",
+                        "name": "policy",
+                        "required": true,
+                        "schema": {
+                            "example": "40fa2aa67258b4ce7b5782f74831d46a84c59a0ff0c28262fab21728",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "What should the results be sorted by. Options are `price` and `rank`. Default is `price`.",
+                        "in": "query",
+                        "name": "sortBy",
+                        "required": false,
+                        "schema": {
+                            "example": "price",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Which direction should the results be sorted. Options are `asc`, `desc`. Default is `asc`",
+                        "in": "query",
+                        "name": "order",
+                        "required": false,
+                        "schema": {
+                            "example": "asc",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Search for a certain NFT\u0027s name, default is `null`.",
+                        "in": "query",
+                        "name": "search",
+                        "required": false,
+                        "schema": {
+                            "example": "ClayNation3725",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Return only nfts that are on sale Options are `0`, `1`. Default is `0`.",
+                        "in": "query",
+                        "name": "onSale",
+                        "required": false,
+                        "schema": {
+                            "example": 1,
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "This endpoint supports pagination. Default page is `1`.",
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "schema": {
+                            "example": 1,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Specify how many items to return per page. Maximum is `100`, default is `100`.",
+                        "in": "query",
+                        "name": "perPage",
+                        "required": false,
+                        "schema": {
+                            "example": 100,
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/market_nft_collection_assets"
+                                }
+                            }
+                        },
+                        "description": "Collection assets."
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Collection assets",
+                "tags": [
+                    "Market \u00bb NFTs"
+                ]
+            }
+        },
+        "/nft/collection/holders/distribution": {
+            "get": {
+                "description": "Get the distribution of NFTs within a collection by bucketing into number of NFTs held groups. This counts someone who has an asset listed on a marketplace as an owner, as well as someone who is staking their NFT to a supported smart contract.",
+                "parameters": [
+                    {
+                        "description": "The policy ID for the collection.",
+                        "in": "query",
+                        "name": "policy",
+                        "required": true,
+                        "schema": {
+                            "example": "40fa2aa67258b4ce7b5782f74831d46a84c59a0ff0c28262fab21728",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/market_nft_collection_holders_distribution"
+                                }
+                            }
+                        },
+                        "description": "Collection holder distribution"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Holder distribution",
+                "tags": [
+                    "Market \u00bb NFTs"
+                ]
+            }
+        },
+        "/nft/collection/holders/top": {
+            "get": {
+                "description": "Get the top holders for a particular NFT collection. This counts someone who has an asset listed on a marketplace as an owner, as well as someone who is staking their NFT to a supported smart contract.",
+                "parameters": [
+                    {
+                        "description": "The policy ID for the collection.",
+                        "in": "query",
+                        "name": "policy",
+                        "required": true,
+                        "schema": {
+                            "example": "40fa2aa67258b4ce7b5782f74831d46a84c59a0ff0c28262fab21728",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "This endpoint supports pagination. Default page is `1`.",
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "schema": {
+                            "example": 1,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Specify how many items to return per page. Maximum is `100`, default is `10`.",
+                        "in": "query",
+                        "name": "perPage",
+                        "required": false,
+                        "schema": {
+                            "example": 10,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Whether or not to exclude marketplace addresses (0, 1)",
+                        "in": "query",
+                        "name": "excludeExchanges",
+                        "required": false,
+                        "schema": {
+                            "example": 1,
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/market_nft_collection_holders_top"
+                                }
+                            }
+                        },
+                        "description": "Collection top holders"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Top holders",
+                "tags": [
+                    "Market \u00bb NFTs"
+                ]
+            }
+        },
+        "/nft/collection/holders/trended": {
+            "get": {
+                "description": "Get holders trended by day for a particular NFT collection. This counts someone who has an asset listed on a marketplace as an owner, as well as someone who is staking their NFT to a supported smart contract.",
+                "parameters": [
+                    {
+                        "description": "The policy ID for the collection.",
+                        "in": "query",
+                        "name": "policy",
+                        "required": true,
+                        "schema": {
+                            "example": "40fa2aa67258b4ce7b5782f74831d46a84c59a0ff0c28262fab21728",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The time interval. Options are `7d`, `30d`, `90d`, `180d`, `1y` and `all`. Defaults to `30d`.",
+                        "in": "query",
+                        "name": "timeframe",
+                        "required": false,
+                        "schema": {
+                            "example": "30d",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/market_nft_collection_holders_trended"
+                                }
+                            }
+                        },
+                        "description": "Collection trended holders"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Trended holders",
+                "tags": [
+                    "Market \u00bb NFTs"
+                ]
+            }
+        },
+        "/nft/collection/info": {
+            "get": {
+                "description": "Get basic information about a collection like name, socials, and logo.",
+                "parameters": [
+                    {
+                        "description": "The policy ID for the collection.",
+                        "in": "query",
+                        "name": "policy",
+                        "required": true,
+                        "schema": {
+                            "example": "1fcf4baf8e7465504e115dcea4db6da1f7bed335f2a672e44ec3f94e",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/market_nft_collection_info"
+                                }
+                            }
+                        },
+                        "description": "Collection info"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Collection info",
+                "tags": [
+                    "Market \u00bb NFTs"
+                ]
+            }
+        },
+        "/nft/collection/listings": {
+            "get": {
+                "description": "Get the amount of active listings along with total supply for a particular collection.",
+                "parameters": [
+                    {
+                        "description": "The policy ID for the collection.",
+                        "in": "query",
+                        "name": "policy",
+                        "required": true,
+                        "schema": {
+                            "example": "1fcf4baf8e7465504e115dcea4db6da1f7bed335f2a672e44ec3f94e",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/market_nft_collection_listings"
+                                }
+                            }
+                        },
+                        "description": "Current active listings"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Number of active listings",
+                "tags": [
+                    "Market \u00bb NFTs"
+                ]
+            }
+        },
+        "/nft/collection/listings/depth": {
+            "get": {
+                "description": "Get cumulative amount of listings at each price point, starting at the floor and moving upwards.",
+                "parameters": [
+                    {
+                        "description": "The policy ID for the collection.",
+                        "in": "query",
+                        "name": "policy",
+                        "required": true,
+                        "schema": {
+                            "example": "1fcf4baf8e7465504e115dcea4db6da1f7bed335f2a672e44ec3f94e",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Specify how many items to return. Maximum is `1000`, default is `500`.",
+                        "in": "query",
+                        "name": "items",
+                        "required": false,
+                        "schema": {
+                            "example": 600,
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/market_nft_collection_listings_depth"
+                                }
+                            }
+                        },
+                        "description": "NFT collection listings depth"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "NFT listings depth",
+                "tags": [
+                    "Market \u00bb NFTs"
+                ]
+            }
+        },
+        "/nft/collection/listings/individual": {
+            "get": {
+                "description": "Get a list of active listings with supporting information. This endpoint supports pagination and sorting by price and time listed.",
+                "parameters": [
+                    {
+                        "description": "The policy ID for the collection.",
+                        "in": "query",
+                        "name": "policy",
+                        "required": true,
+                        "schema": {
+                            "example": "1fcf4baf8e7465504e115dcea4db6da1f7bed335f2a672e44ec3f94e",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "What should the results be sorted by. Options are `price`, `time`. Default is `price`.",
+                        "in": "query",
+                        "name": "sortBy",
+                        "required": false,
+                        "schema": {
+                            "example": "price",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Which direction should the results be sorted. Options are `asc`, `desc`. Default is `asc`",
+                        "in": "query",
+                        "name": "order",
+                        "required": false,
+                        "schema": {
+                            "example": "asc",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "This endpoint supports pagination. Default page is `1`.",
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "schema": {
+                            "example": 1,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Specify how many items to return per page. Maximum is `100`, default is `100`.",
+                        "in": "query",
+                        "name": "perPage",
+                        "required": false,
+                        "schema": {
+                            "example": 100,
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/market_nft_collection_listings_individual"
+                                }
+                            }
+                        },
+                        "description": "NFT collection listings"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Get list of active listings",
+                "tags": [
+                    "Market \u00bb NFTs"
+                ]
+            }
+        },
+        "/nft/collection/listings/trended": {
+            "get": {
+                "description": "Get trended number of listings and floor price for a particular NFT collection.",
+                "parameters": [
+                    {
+                        "description": "The policy ID for the collection.",
+                        "in": "query",
+                        "name": "policy",
+                        "required": true,
+                        "schema": {
+                            "example": "1fcf4baf8e7465504e115dcea4db6da1f7bed335f2a672e44ec3f94e",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The time interval. Options are `3m`, `5m`, `15m`, `30m`, `1h`, `2h`, `4h`, `12h`, `1d`, `3d`, `1w`, `1M`.",
+                        "in": "query",
+                        "name": "interval",
+                        "required": true,
+                        "schema": {
+                            "example": "1d",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The number of intervals to return, e.g. if you want 180 days of data in 1d intervals, then pass `180` here. Leave blank for full history.",
+                        "in": "query",
+                        "name": "numIntervals",
+                        "required": false,
+                        "schema": {
+                            "example": 180,
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/market_nft_collection_listings_trended"
+                                }
+                            }
+                        },
+                        "description": "NFT collection trended listings"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "NFT listings trended",
+                "tags": [
+                    "Market \u00bb NFTs"
+                ]
+            }
+        },
+        "/nft/collection/ohlcv": {
+            "get": {
+                "description": "Get OHLCV (open, high, low, close, volume) of floor price for a particular NFT collection. If you don\u0027t plan to format with candlesticks, you can use the `close` value from each interval and create a simple line chart. `time` is the start time of the interval, as a UNIX timestamp.",
+                "parameters": [
+                    {
+                        "description": "The policy ID for the collection.",
+                        "in": "query",
+                        "name": "policy",
+                        "required": true,
+                        "schema": {
+                            "example": "1fcf4baf8e7465504e115dcea4db6da1f7bed335f2a672e44ec3f94e",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The time interval. Options are `3m`, `5m`, `15m`, `30m`, `1h`, `2h`, `4h`, `12h`, `1d`, `3d`, `1w`, `1M`.",
+                        "in": "query",
+                        "name": "interval",
+                        "required": true,
+                        "schema": {
+                            "example": "1d",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The number of intervals to return, e.g. if you want 180 days of data in 1d intervals, then pass `180` here.",
+                        "in": "query",
+                        "name": "numIntervals",
+                        "required": false,
+                        "schema": {
+                            "example": 180,
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/market_nft_collection_ohlcv"
+                                }
+                            }
+                        },
+                        "description": "NFT collection OHLCV"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "NFT floor price OHLCV",
+                "tags": [
+                    "Market \u00bb NFTs"
+                ]
+            }
+        },
+        "/nft/collection/stats": {
+            "get": {
+                "description": "Get basic information about a collection like floor price, volume, and supply. Volume returned is lifetime volume. Use `/nft/collection/trades/stats` for different timeframes and more information about trading volume.",
+                "parameters": [
+                    {
+                        "description": "The policy ID for the collection.",
+                        "in": "query",
+                        "name": "policy",
+                        "required": true,
+                        "schema": {
+                            "example": "1fcf4baf8e7465504e115dcea4db6da1f7bed335f2a672e44ec3f94e",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/market_nft_collection_stats"
+                                }
+                            }
+                        },
+                        "description": "Collection stats"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Collection stats",
+                "tags": [
+                    "Market \u00bb NFTs"
+                ]
+            }
+        },
+        "/nft/collection/stats/extended": {
+            "get": {
+                "description": "Get basic information about a collection like floor price, volume, and supply. Volume returned is lifetime volume.\n`pctChg` values are the percentage difference between current values and value up until timeframe. This returns the\nsame data as `nft/collection/stats`, but with percent changes included.\n",
+                "parameters": [
+                    {
+                        "description": "The policy ID for the collection.",
+                        "in": "query",
+                        "name": "policy",
+                        "required": true,
+                        "schema": {
+                            "example": "1fcf4baf8e7465504e115dcea4db6da1f7bed335f2a672e44ec3f94e",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The time interval. Options are `24h`, `7d`, `30d`. Defaults to `24h`.",
+                        "in": "query",
+                        "name": "timeframe",
+                        "required": false,
+                        "schema": {
+                            "example": "24h",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/market_nft_collection_stats_extended"
+                                }
+                            }
+                        },
+                        "description": "NFT collection extended stats"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Collection stats (extended)",
+                "tags": [
+                    "Market \u00bb NFTs"
+                ]
+            }
+        },
+        "/nft/collection/trades": {
+            "get": {
+                "description": "Get individual trades for a particular collection or for the entire NFT market by not specifying a policy ID.",
+                "parameters": [
+                    {
+                        "description": "The policy ID for the collection.",
+                        "in": "query",
+                        "name": "policy",
+                        "required": false,
+                        "schema": {
+                            "example": "1fcf4baf8e7465504e115dcea4db6da1f7bed335f2a672e44ec3f94e",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The time interval. Options are `1h`, `4h`, `24h`, `7d`, `30d`, `90d`, `180d`, `1y`, `all`. Defaults to `30d`.",
+                        "in": "query",
+                        "name": "timeframe",
+                        "required": false,
+                        "schema": {
+                            "example": "30d",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "What should the results be sorted by. Options are `amount`, `time`. Default is `time`.",
+                        "in": "query",
+                        "name": "sortBy",
+                        "required": false,
+                        "schema": {
+                            "example": "time",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Which direction should the results be sorted. Options are `asc`, `desc`. Default is `desc`.",
+                        "in": "query",
+                        "name": "order",
+                        "required": false,
+                        "schema": {
+                            "example": "desc",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Filter to only trades of a certain ADA amount.",
+                        "in": "query",
+                        "name": "minAmount",
+                        "required": false,
+                        "schema": {
+                            "example": 1000,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Filter trades using a UNIX timestamp, will only return trades after this timestamp.",
+                        "in": "query",
+                        "name": "from",
+                        "required": false,
+                        "schema": {
+                            "example": 1704759422,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "This endpoint supports pagination. Default page is `1`.",
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "schema": {
+                            "example": 1,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Specify how many items to return per page. Maximum is `100`, default is `100`.",
+                        "in": "query",
+                        "name": "perPage",
+                        "required": false,
+                        "schema": {
+                            "example": 100,
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/market_nft_collection_trades"
+                                }
+                            }
+                        },
+                        "description": "Individual trades"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Trades",
+                "tags": [
+                    "Market \u00bb NFTs"
+                ]
+            }
+        },
+        "/nft/collection/trades/stats": {
+            "get": {
+                "description": "Get trading stats like volume and number of sales for a particular collection.",
+                "parameters": [
+                    {
+                        "description": "The policy ID for the collection.",
+                        "in": "query",
+                        "name": "policy",
+                        "required": true,
+                        "schema": {
+                            "example": "1fcf4baf8e7465504e115dcea4db6da1f7bed335f2a672e44ec3f94e",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "What timeframe to include in volume aggregation. Options are `1h`, `4h`, `24h`, `7d`, `30d`, `all`. Defaults to `24h`.",
+                        "in": "query",
+                        "name": "timeframe",
+                        "required": false,
+                        "schema": {
+                            "example": "24h",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/market_nft_collection_trades_stats"
+                                }
+                            }
+                        },
+                        "description": "Amount of trading volume"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Trading stats",
+                "tags": [
+                    "Market \u00bb NFTs"
+                ]
+            }
+        },
+        "/nft/collection/traits/price": {
+            "get": {
+                "description": "Get a list of traits within a collection and each trait\u0027s floor price. This allows you to see which traits are higher/lower priced.",
+                "parameters": [
+                    {
+                        "description": "The policy ID for the collection.",
+                        "in": "query",
+                        "name": "policy",
+                        "required": true,
+                        "schema": {
+                            "example": "40fa2aa67258b4ce7b5782f74831d46a84c59a0ff0c28262fab21728",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The name of a specific NFT to get trait prices for.",
+                        "in": "query",
+                        "name": "name",
+                        "required": false,
+                        "schema": {
+                            "example": "ClayNation3725",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/market_nft_collection_traits_price"
+                                }
+                            }
+                        },
+                        "description": "Collection trait prices"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Collection trait prices",
+                "tags": [
+                    "Market \u00bb NFTs"
+                ]
+            }
+        },
+        "/nft/collection/traits/rarity": {
+            "get": {
+                "description": "Get every metadata attribute and how likely it is to occur within the NFT collection.",
+                "parameters": [
+                    {
+                        "description": "The policy ID for the collection.",
+                        "in": "query",
+                        "name": "policy",
+                        "required": true,
+                        "schema": {
+                            "example": "1fcf4baf8e7465504e115dcea4db6da1f7bed335f2a672e44ec3f94e",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/market_nft_collection_rarity"
+                                }
+                            }
+                        },
+                        "description": "Collection metadata rarity"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Collection metadata rarity",
+                "tags": [
+                    "Market \u00bb NFTs"
+                ]
+            }
+        },
+        "/nft/collection/traits/rarity/rank": {
+            "get": {
+                "description": "Get rank of NFT\u0027s rarity within a collection",
+                "parameters": [
+                    {
+                        "description": "The policy ID for the collection.",
+                        "in": "query",
+                        "name": "policy",
+                        "required": true,
+                        "schema": {
+                            "example": "40fa2aa67258b4ce7b5782f74831d46a84c59a0ff0c28262fab21728",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The name of the NFT",
+                        "in": "query",
+                        "name": "name",
+                        "required": true,
+                        "schema": {
+                            "example": "ClayNation3725",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/market_nft_collection_rarity_rank"
+                                }
+                            }
+                        },
+                        "description": "NFT rarity rank"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "NFT rarity rank",
+                "tags": [
+                    "Market \u00bb NFTs"
+                ]
+            }
+        },
+        "/nft/collection/volume/trended": {
+            "get": {
+                "description": "Get trended volume and number of sales for a particular NFT collection.",
+                "parameters": [
+                    {
+                        "description": "The policy ID for the collection.",
+                        "in": "query",
+                        "name": "policy",
+                        "required": true,
+                        "schema": {
+                            "example": "1fcf4baf8e7465504e115dcea4db6da1f7bed335f2a672e44ec3f94e",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The time interval. Options are `3m`, `5m`, `15m`, `30m`, `1h`, `2h`, `4h`, `12h`, `1d`, `3d`, `1w`, `1M`.",
+                        "in": "query",
+                        "name": "interval",
+                        "required": true,
+                        "schema": {
+                            "example": "1d",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The number of intervals to return, e.g. if you want 180 days of data in 1d intervals, then pass `180` here. Leave blank for full history.",
+                        "in": "query",
+                        "name": "numIntervals",
+                        "required": false,
+                        "schema": {
+                            "example": 180,
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/market_nft_collection_volume_trended"
+                                }
+                            }
+                        },
+                        "description": "NFT collection trended volume"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "NFT volume trended",
+                "tags": [
+                    "Market \u00bb NFTs"
+                ]
+            }
+        },
+        "/nft/market/stats": {
+            "get": {
+                "description": "Get high-level market stats across the entire NFT market. `addresses` is the count of stake keys that have purchased or sold an NFT within the given timeframe. If an address does not have a stake key, it is still counted as a distinct address.",
+                "parameters": [
+                    {
+                        "description": "The time interval. Options are `1h`, `4h`, `24h`, `7d`, `30d`, `all`. Defaults to `24h`.",
+                        "in": "query",
+                        "name": "timeframe",
+                        "required": true,
+                        "schema": {
+                            "example": "1d",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/market_nft_market_stats"
+                                }
+                            }
+                        },
+                        "description": "NFT market stats"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Market-wide NFT stats",
+                "tags": [
+                    "Market \u00bb NFTs"
+                ]
+            }
+        },
+        "/nft/market/stats/extended": {
+            "get": {
+                "description": "Get high-level market stats across the entire NFT market. `addresses` is the count of stake keys that have purchased or sold an NFT within the given timeframe. If an address does not have a stake key, it is still counted as a distinct address.",
+                "parameters": [
+                    {
+                        "description": "The time interval. Options are `1h`, `4h`, `24h`, `7d`, `30d`, `all`. Defaults to `24h`.",
+                        "in": "query",
+                        "name": "timeframe",
+                        "required": true,
+                        "schema": {
+                            "example": "1d",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/market_nft_market_stats_extended"
+                                }
+                            }
+                        },
+                        "description": "NFT market stats"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Market-wide NFT stats (extended)",
+                "tags": [
+                    "Market \u00bb NFTs"
+                ]
+            }
+        },
+        "/nft/market/volume/trended": {
+            "get": {
+                "description": "Get trended volume for entire NFT market.",
+                "parameters": [
+                    {
+                        "description": "The time interval. Options are `7d`, `30d`, `90d`, `180d`, `1y`, `all`. Defaults to `30d`.",
+                        "in": "query",
+                        "name": "timeframe",
+                        "required": true,
+                        "schema": {
+                            "example": "30d",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/market_nft_market_volume_trended"
+                                }
+                            }
+                        },
+                        "description": "NFT market volume trended"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "NFT market volume",
+                "tags": [
+                    "Market \u00bb NFTs"
+                ]
+            }
+        },
+        "/nft/marketplace/stats": {
+            "get": {
+                "description": "Get high-level NFT marketplace stats.",
+                "parameters": [
+                    {
+                        "description": "The time interval. Options are `24h`, `7d`, `30d`, `90d`, `180d`, `all`. Defaults to `7d`.",
+                        "in": "query",
+                        "name": "timeframe",
+                        "required": false,
+                        "schema": {
+                            "example": "30d",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Filters data to a certain marketplace by name.",
+                        "in": "query",
+                        "name": "marketplace",
+                        "required": false,
+                        "schema": {
+                            "example": "jpg.store",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Filters to only count data that occured between yesterday 00:00UTC and today 00:00UTC `(0,1)`.",
+                        "in": "query",
+                        "name": "lastDay",
+                        "required": false,
+                        "schema": {
+                            "example": 0,
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/market_nft_marketplace_stats"
+                                }
+                            }
+                        },
+                        "description": "NFT marketplace stats"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "NFT Marketplace stats",
+                "tags": [
+                    "Market \u00bb NFTs"
+                ]
+            }
+        },
+        "/nft/top/timeframe": {
+            "get": {
+                "description": "Get top NFT rankings based on total market cap, 24 hour volume or 24 hour top price gainers/losers.",
+                "parameters": [
+                    {
+                        "description": "Criteria to rank NFT Collections based on. Options are `marketCap`, `volume`, `gainers`, `losers`.",
+                        "in": "query",
+                        "name": "ranking",
+                        "required": true,
+                        "schema": {
+                            "example": "marketCap",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Specify how many items to return. Maximum is `100`, default is `25`.",
+                        "in": "query",
+                        "name": "items",
+                        "required": false,
+                        "schema": {
+                            "example": 50,
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/market_nft_top_timeframe"
+                                }
+                            }
+                        },
+                        "description": "NFT Top Rankings."
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "406": {
+                        "$ref": "#/components/responses/406"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "NFT top rankings",
+                "tags": [
+                    "Market \u00bb NFTs"
+                ]
+            }
+        },
+        "/nft/top/volume": {
+            "get": {
+                "description": "Get top NFT collections by trading volume over a given timeframe.",
+                "parameters": [
+                    {
+                        "description": "What timeframe to include in volume aggregation. Options are `1h`, `4h`, `24h`, `7d`, `30d`, `all`. Defaults to `24h`.",
+                        "in": "query",
+                        "name": "timeframe",
+                        "required": false,
+                        "schema": {
+                            "example": "24h",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "This endpoint supports pagination. Default page is `1`.",
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "schema": {
+                            "example": 1,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Specify how many items to return per page. Maximum is `100`, default is `10`.",
+                        "in": "query",
+                        "name": "perPage",
+                        "required": false,
+                        "schema": {
+                            "example": 10,
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/market_nft_top_volume"
+                                }
+                            }
+                        },
+                        "description": "Top NFT collections by volume"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Top volume collections",
+                "tags": [
+                    "Market \u00bb NFTs"
+                ]
+            }
+        },
+        "/nft/top/volume/extended": {
+            "get": {
+                "description": "Get top NFT collections by trading volume over a given timeframe.\n`pctChg` values are the percentage difference between current values and values up until the given `timeframe`.\n",
+                "parameters": [
+                    {
+                        "description": "What timeframe to include in volume aggregation. Options are `1h`, `4h`, `24h`, `7d`, `30d`, `all`. Defaults to `24h`.",
+                        "in": "query",
+                        "name": "timeframe",
+                        "required": false,
+                        "schema": {
+                            "example": "24h",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "This endpoint supports pagination. Default page is `1`.",
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "schema": {
+                            "example": 1,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Specify how many items to return per page. Maximum is `100`, default is `10`.",
+                        "in": "query",
+                        "name": "perPage",
+                        "required": false,
+                        "schema": {
+                            "example": 10,
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/market_nft_top_volume_extended"
+                                }
+                            }
+                        },
+                        "description": "Top NFT collections by volume"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Top volume collections (extended)",
+                "tags": [
+                    "Market \u00bb NFTs"
+                ]
+            }
+        },
+        "/token/debt/loans": {
+            "get": {
+                "description": "Get active P2P loans of a certain token (Currently only supports P2P protocols like Lenfi and Levvy).",
+                "parameters": [
+                    {
+                        "description": "Token unit (policy + hex name) to filter by",
+                        "in": "query",
+                        "name": "unit",
+                        "required": true,
+                        "schema": {
+                            "example": "8fef2d34078659493ce161a6c7fba4b56afefa8535296a5743f6958741414441",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Comma seperated value enabling you to filter to loans where token is used as `collateral`, `debt`, `interest` or a mix of them, default is `collateral,debt` filtering to loans where token is used as collateral OR debt.",
+                        "in": "query",
+                        "name": "include",
+                        "required": false,
+                        "schema": {
+                            "example": "collateral,debt",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "What should the results be sorted by. Options are `time`, `expiration`. Default is `time`. `expiration` is expiration date of loan.",
+                        "in": "query",
+                        "name": "sortBy",
+                        "required": false,
+                        "schema": {
+                            "example": "time",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Which direction should the results be sorted. Options are `asc`, `desc`. Default is `desc`.",
+                        "in": "query",
+                        "name": "order",
+                        "required": false,
+                        "schema": {
+                            "example": "desc",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "This endpoint supports pagination. Default page is `1`.",
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "schema": {
+                            "example": 1,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Specify how many items to return per page, default is `100`.",
+                        "in": "query",
+                        "name": "perPage",
+                        "required": false,
+                        "schema": {
+                            "example": 100,
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/token_debt_loans_response"
+                                }
+                            }
+                        },
+                        "description": "P2P loans successfully returned"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Active loans",
+                "tags": [
+                    "Market \u00bb Tokens"
+                ]
+            }
+        },
+        "/token/debt/offers": {
+            "get": {
+                "description": "Get active P2P loan offers that are not associated with any loans yet (Currently only supports P2P protocols like Lenfi and Levvy).",
+                "parameters": [
+                    {
+                        "description": "Token unit (policy + hex name) to filter by",
+                        "in": "query",
+                        "name": "unit",
+                        "required": true,
+                        "schema": {
+                            "example": "8fef2d34078659493ce161a6c7fba4b56afefa8535296a5743f6958741414441",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Comma seperated value enabling you to filter to offers where token is used as `collateral`, `debt`, `interest` or a mix of them, default is `collateral,debt` filtering to offers where token is used as collateral OR debt.",
+                        "in": "query",
+                        "name": "include",
+                        "required": false,
+                        "schema": {
+                            "example": "collateral,debt",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "What should the results be sorted by. Options are `time`, `duration`. Default is `time`. `duration` is loan duration in seconds.",
+                        "in": "query",
+                        "name": "sortBy",
+                        "required": false,
+                        "schema": {
+                            "example": "time",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Which direction should the results be sorted. Options are `asc`, `desc`. Default is `desc`.",
+                        "in": "query",
+                        "name": "order",
+                        "required": false,
+                        "schema": {
+                            "example": "desc",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "This endpoint supports pagination. Default page is `1`.",
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "schema": {
+                            "example": 1,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Specify how many items to return per page, default is `100`.",
+                        "in": "query",
+                        "name": "perPage",
+                        "required": false,
+                        "schema": {
+                            "example": 100,
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/token_debt_offers_response"
+                                }
+                            }
+                        },
+                        "description": "P2P offers successfully returned"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Loan offers",
+                "tags": [
+                    "Market \u00bb Tokens"
+                ]
+            }
+        },
+        "/token/holders": {
+            "get": {
+                "description": "Get total number of holders for a specific token. This uses `coalesce(stake_address, address)`, so all addresses under one stake key will be aggregated into 1 holder.",
+                "parameters": [
+                    {
+                        "description": "Token unit (policy + hex name)",
+                        "in": "query",
+                        "name": "unit",
+                        "required": true,
+                        "schema": {
+                            "example": "8fef2d34078659493ce161a6c7fba4b56afefa8535296a5743f6958741414441",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/token_holders_response"
+                                }
+                            }
+                        },
+                        "description": "Holders successfully returned"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Token holders",
+                "tags": [
+                    "Market \u00bb Tokens"
+                ]
+            }
+        },
+        "/token/holders/top": {
+            "get": {
+                "description": "Get top token holders.",
+                "parameters": [
+                    {
+                        "description": "Token unit (policy + hex name)",
+                        "in": "query",
+                        "name": "unit",
+                        "required": true,
+                        "schema": {
+                            "example": "8fef2d34078659493ce161a6c7fba4b56afefa8535296a5743f6958741414441",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "This endpoint supports pagination. Default page is `1`.",
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "schema": {
+                            "example": 1,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Specify how many items to return per page. Maximum is `100`, default is `20`.",
+                        "in": "query",
+                        "name": "perPage",
+                        "required": false,
+                        "schema": {
+                            "example": 20,
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/token_holders_top_response"
+                                }
+                            }
+                        },
+                        "description": "Top holders successfully returned"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Top token holders",
+                "tags": [
+                    "Market \u00bb Tokens"
+                ]
+            }
+        },
+        "/token/indicators": {
+            "get": {
+                "description": "Get indicator values (e.g. EMA, RSI) based on price data for a specific token. There are multiple parameters that can be passed, but some only apply to certain indicators. This will return the most recent values.",
+                "parameters": [
+                    {
+                        "description": "Token unit (policy + hex name)",
+                        "in": "query",
+                        "name": "unit",
+                        "required": true,
+                        "schema": {
+                            "example": "8fef2d34078659493ce161a6c7fba4b56afefa8535296a5743f6958741414441",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The time interval. Options are `3m`, `5m`, `15m`, `30m`, `1h`, `2h`, `4h`, `12h`, `1d`, `3d`, `1w`, `1M`.",
+                        "in": "query",
+                        "name": "interval",
+                        "required": true,
+                        "schema": {
+                            "example": "1d",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The number of items to return. The maximum number of items that can be returned is 1000.",
+                        "in": "query",
+                        "name": "items",
+                        "required": false,
+                        "schema": {
+                            "example": 100,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Specify which indicator to use. Options are `ma`, `ema`, `rsi`, `macd`, `bb`, `bbw`.",
+                        "in": "query",
+                        "name": "indicator",
+                        "required": false,
+                        "schema": {
+                            "example": "ma",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Length of data to include. Used in `ma`, `ema`, `rsi`, `bb`, and `bbw`.",
+                        "in": "query",
+                        "name": "length",
+                        "required": false,
+                        "schema": {
+                            "example": 14,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Length of data to include for smoothing. Used in `ema`. Most often is set to 2.",
+                        "in": "query",
+                        "name": "smoothingFactor",
+                        "required": false,
+                        "schema": {
+                            "example": 2,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Length of shorter EMA to use in MACD. Only used in `macd`",
+                        "in": "query",
+                        "name": "fastLength",
+                        "required": false,
+                        "schema": {
+                            "example": 12,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Length of longer EMA to use in MACD. Only used in `macd`",
+                        "in": "query",
+                        "name": "slowLength",
+                        "required": false,
+                        "schema": {
+                            "example": 26,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Length of signal EMA to use in MACD. Only used in `macd`",
+                        "in": "query",
+                        "name": "signalLength",
+                        "required": false,
+                        "schema": {
+                            "example": 9,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Standard deviation multiplier to use for upper and lower bands of Bollinger Bands (typically set to 2). Used in `bb` and `bbw`.",
+                        "in": "query",
+                        "name": "stdMult",
+                        "required": false,
+                        "schema": {
+                            "example": 2,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Which quote currency to use when building price data (e.g. `ADA`, `USD`).",
+                        "in": "query",
+                        "name": "quote",
+                        "required": false,
+                        "schema": {
+                            "example": "ADA",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/token_indicators_response"
+                                }
+                            }
+                        },
+                        "description": "Token indicator values successfully returned"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Token price indicators",
+                "tags": [
+                    "Market \u00bb Tokens"
+                ]
+            }
+        },
+        "/token/mcap": {
+            "get": {
+                "description": "Get a specific token\u0027s supply and market cap information. We pull circulating supply information from [this repo](https://github.com/minswap/market-cap).",
+                "parameters": [
+                    {
+                        "description": "Token unit (policy + hex name)",
+                        "in": "query",
+                        "name": "unit",
+                        "required": true,
+                        "schema": {
+                            "example": "8fef2d34078659493ce161a6c7fba4b56afefa8535296a5743f6958741414441",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/token_mcap_response"
+                                }
+                            }
+                        },
+                        "description": "Supply and market cap successfully returned"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Token market cap",
+                "tags": [
+                    "Market \u00bb Tokens"
+                ]
+            }
+        },
+        "/token/ohlcv": {
+            "get": {
+                "description": "Get a specific token\u0027s trended (`open`, `high`, `low`, `close`, `volume`) price data. You can either pass a token unit to get aggregated data across all liquidity pools, or an `onchainID` for a specific pair (see `/token/pools`).",
+                "parameters": [
+                    {
+                        "description": "Token unit (policy + hex name)",
+                        "in": "query",
+                        "name": "unit",
+                        "required": false,
+                        "schema": {
+                            "example": "8fef2d34078659493ce161a6c7fba4b56afefa8535296a5743f6958741414441",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Pair onchain ID to get ohlc data for",
+                        "in": "query",
+                        "name": "onchainID",
+                        "required": false,
+                        "schema": {
+                            "example": "0be55d262b29f564998ff81efe21bdc0022621c12f15af08d0f2ddb1.39b9b709ac8605fc82116a2efc308181ba297c11950f0f350001e28f0e50868b",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The time interval. Options are `3m`, `5m`, `15m`, `30m`, `1h`, `2h`, `4h`, `12h`, `1d`, `3d`, `1w`, `1M`.",
+                        "in": "query",
+                        "name": "interval",
+                        "required": true,
+                        "schema": {
+                            "example": "1d",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The number of intervals to return, e.g. if you want 180 days of data in 1d intervals, then pass `180` here.",
+                        "in": "query",
+                        "name": "numIntervals",
+                        "required": false,
+                        "schema": {
+                            "example": 180,
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/token_ohlcv_response"
+                                }
+                            }
+                        },
+                        "description": "Token ohlcv data successfully returned"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Token price OHLCV",
+                "tags": [
+                    "Market \u00bb Tokens"
+                ]
+            }
+        },
+        "/token/pools": {
+            "get": {
+                "description": "Get a specific token\u0027s active liquidity pools. Can search for all token pools using `unit` or can search for specific pool with `onchainID`.",
+                "parameters": [
+                    {
+                        "description": "Token unit (policy + hex name)",
+                        "in": "query",
+                        "name": "unit",
+                        "required": false,
+                        "schema": {
+                            "example": "8fef2d34078659493ce161a6c7fba4b56afefa8535296a5743f6958741414441",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Liquidity pool onchainID",
+                        "in": "query",
+                        "name": "onchainID",
+                        "required": false,
+                        "schema": {
+                            "example": "0be55d262b29f564998ff81efe21bdc0022621c12f15af08d0f2ddb1.39b9b709ac8605fc82116a2efc308181ba297c11950f0f350001e28f0e50868b",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Return only ADA pools or all pools (0, 1)",
+                        "in": "query",
+                        "name": "adaOnly",
+                        "required": false,
+                        "schema": {
+                            "example": 1,
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/token_pools_response"
+                                }
+                            }
+                        },
+                        "description": "Liquidity pools successfully returned"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Token liquidity pools",
+                "tags": [
+                    "Market \u00bb Tokens"
+                ]
+            }
+        },
+        "/token/prices": {
+            "post": {
+                "description": "Get an object with token units (policy + hex name) as keys and price as values for a list of policies and hex names. These prices are aggregated across all supported DEXs. Max batch size is `100` tokens.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/token_prices_body"
+                            }
+                        }
+                    },
+                    "description": "List of policy + hex names of tokens.",
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/token_prices_response"
+                                }
+                            }
+                        },
+                        "description": "Prices successfully returned"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Token prices",
+                "tags": [
+                    "Market \u00bb Tokens"
+                ]
+            }
+        },
+        "/token/quote": {
+            "get": {
+                "description": "Get current quote price (e.g, current ADA/USD price).",
+                "parameters": [
+                    {
+                        "description": "Quote currency to use (USD, EUR, ETH, BTC). Default is `USD`.",
+                        "in": "query",
+                        "name": "quote",
+                        "required": false,
+                        "schema": {
+                            "example": "USD",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/token_quote_response"
+                                }
+                            }
+                        },
+                        "description": "Current Quote price successfully returned"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Quote price",
+                "tags": [
+                    "Market \u00bb Tokens"
+                ]
+            }
+        },
+        "/token/quote/available": {
+            "get": {
+                "description": "Get all currently available quote currencies.",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/token_quote_available_response"
+                                }
+                            }
+                        },
+                        "description": "Available quote currencies successfully returned"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Available quote currencies",
+                "tags": [
+                    "Market \u00bb Tokens"
+                ]
+            }
+        },
+        "/token/top/liquidity": {
+            "get": {
+                "description": "Get tokens ranked by their DEX liquidity. This includes both AMM and order book liquidity.",
+                "parameters": [
+                    {
+                        "description": "This endpoint supports pagination. Default page is `1`.",
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "schema": {
+                            "example": 1,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Specify how many items to return per page. Maximum is `100`, default is `10`.",
+                        "in": "query",
+                        "name": "perPage",
+                        "required": false,
+                        "schema": {
+                            "example": 10,
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/token_top_liquidity_response"
+                                }
+                            }
+                        },
+                        "description": "Top liquidity tokens successfully returned"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Top liquidity tokens",
+                "tags": [
+                    "Market \u00bb Tokens"
+                ]
+            }
+        },
+        "/token/top/mcap": {
+            "get": {
+                "description": "Get tokens with top market cap in a descending order. This endpoint does exclude deprecated tokens (e.g. MELD V1 since there was a token migration to MELD V2).",
+                "parameters": [
+                    {
+                        "description": "Sort tokens by circulating market cap or fully diluted value. Options `[mcap, fdv]`.",
+                        "in": "query",
+                        "name": "type",
+                        "required": false,
+                        "schema": {
+                            "example": "mcap",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "This endpoint supports pagination. Default page is `1`.",
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "schema": {
+                            "example": 1,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Specify how many items to return per page. Maximum is `100`, default is `20`.",
+                        "in": "query",
+                        "name": "perPage",
+                        "required": false,
+                        "schema": {
+                            "example": 20,
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/token_top_mcap_response"
+                                }
+                            }
+                        },
+                        "description": "Top market cap tokens successfully returned"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Top market cap tokens",
+                "tags": [
+                    "Market \u00bb Tokens"
+                ]
+            }
+        },
+        "/token/top/volume": {
+            "get": {
+                "description": "Get tokens with top volume for a given timeframe.",
+                "parameters": [
+                    {
+                        "description": "Specify a timeframe in which to aggregate the data by. Options are `[1h, 4h, 12h, 24h, 7d, 30d, 180d, 1y, all]`. Default is `24h`.",
+                        "in": "query",
+                        "name": "timeframe",
+                        "required": false,
+                        "schema": {
+                            "example": "24h",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "This endpoint supports pagination. Default page is `1`.",
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "schema": {
+                            "example": 1,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Specify how many items to return per page. Maximum is `100`, default is `20`.",
+                        "in": "query",
+                        "name": "perPage",
+                        "required": false,
+                        "schema": {
+                            "example": 20,
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/token_top_volume_response"
+                                }
+                            }
+                        },
+                        "description": "Top volume tokens successfully returned"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Top volume tokens",
+                "tags": [
+                    "Market \u00bb Tokens"
+                ]
+            }
+        },
+        "/token/trades": {
+            "get": {
+                "description": "Get token trades across the entire DEX market.",
+                "parameters": [
+                    {
+                        "description": "The time interval. Options are `1h`, `4h`, `24h`, `7d`, `30d`, `90d`, `180d`, `1y`, `all`. Defaults to `30d`.",
+                        "in": "query",
+                        "name": "timeframe",
+                        "required": false,
+                        "schema": {
+                            "example": "30d",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "What should the results be sorted by. Options are `amount`, `time`. Default is `amount`. Filters to only ADA trades if set to `amount`.",
+                        "in": "query",
+                        "name": "sortBy",
+                        "required": false,
+                        "schema": {
+                            "example": "amount",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Which direction should the results be sorted. Options are `asc`, `desc`. Default is `desc`.",
+                        "in": "query",
+                        "name": "order",
+                        "required": false,
+                        "schema": {
+                            "example": "desc",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Optionally filter to a specific token by specifying a token unit (policy + hex name).",
+                        "in": "query",
+                        "name": "unit",
+                        "required": false,
+                        "schema": {
+                            "example": "279c909f348e533da5808898f87f9a14bb2c3dfbbacccd631d927a3f534e454b",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Filter to only trades of a certain ADA amount.",
+                        "in": "query",
+                        "name": "minAmount",
+                        "required": false,
+                        "schema": {
+                            "example": 1000,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Filter trades using a UNIX timestamp, will only return trades after this timestamp.",
+                        "in": "query",
+                        "name": "from",
+                        "required": false,
+                        "schema": {
+                            "example": 1704759422,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "This endpoint supports pagination. Default page is `1`.",
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "schema": {
+                            "example": 1,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Specify how many items to return per page. Maximum is `100`, default is `10`.",
+                        "in": "query",
+                        "name": "perPage",
+                        "required": false,
+                        "schema": {
+                            "example": 10,
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/token_market_trades_response"
+                                }
+                            }
+                        },
+                        "description": "Token trades successfully returned"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Token trades",
+                "tags": [
+                    "Market \u00bb Tokens"
+                ]
+            }
+        },
+        "/token/trading/stats": {
+            "get": {
+                "description": "Get aggregated trading stats for a particular token.",
+                "parameters": [
+                    {
+                        "description": "Token unit (policy + hex name)",
+                        "in": "query",
+                        "name": "unit",
+                        "required": true,
+                        "schema": {
+                            "example": "8fef2d34078659493ce161a6c7fba4b56afefa8535296a5743f6958741414441",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Specify a timeframe in which to aggregate the data by. Options are `[15m, 1h, 4h, 12h, 24h, 7d, 30d, 90d, 180d, 1y, all]`. Default is `24h`.",
+                        "in": "query",
+                        "name": "timeframe",
+                        "required": false,
+                        "schema": {
+                            "example": "24h",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/token_trading_stats_response"
+                                }
+                            }
+                        },
+                        "description": "Trading stats successfully returned"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Trading stats",
+                "tags": [
+                    "Market \u00bb Tokens"
+                ]
+            }
+        },
+        "/transaction/utxos": {
+            "get": {
+                "description": "Get UTxOs from a specific transaction.",
+                "parameters": [
+                    {
+                        "description": "Transaction hash",
+                        "in": "query",
+                        "name": "hash",
+                        "required": false,
+                        "schema": {
+                            "example": "8be33680ec04da1cc98868699c5462fbbf6975529fb6371669fa735d2972d69b",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/onchain_transaction_utxos"
+                                }
+                            }
+                        },
+                        "description": "Transaction UTxOs"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Transaction UTxOs",
+                "tags": [
+                    "Onchain \u00bb Transaction"
+                ]
+            }
+        },
+        "/wallet/portfolio/positions": {
+            "get": {
+                "description": "Get wallet\u0027s current portfolio positions with supporting market data. This includes positions that are staked in a smart contract and LP farm positions (for supported protocols)",
+                "parameters": [
+                    {
+                        "description": "Address to query for",
+                        "in": "query",
+                        "name": "address",
+                        "required": false,
+                        "schema": {
+                            "example": "stake1u8rphunzxm9lr4m688peqmnthmap35yt38rgvaqgsk5jcrqdr2vuc",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/portfolio_positions_response"
+                                }
+                            }
+                        },
+                        "description": "Portfolio positions successfully returned"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Portfolio positions",
+                "tags": [
+                    "Wallet \u00bb Portfolio"
+                ]
+            }
+        },
+        "/wallet/trades/tokens": {
+            "get": {
+                "description": "Get the token trade history for a particular wallet. Optionally pass a token unit to filter to a specific token.",
+                "parameters": [
+                    {
+                        "description": "Address to query for",
+                        "in": "query",
+                        "name": "address",
+                        "required": true,
+                        "schema": {
+                            "example": "stake1u8rphunzxm9lr4m688peqmnthmap35yt38rgvaqgsk5jcrqdr2vuc",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Token unit (policy + hex name) to filter by",
+                        "in": "query",
+                        "name": "unit",
+                        "required": false,
+                        "schema": {
+                            "example": "8fef2d34078659493ce161a6c7fba4b56afefa8535296a5743f6958741414441",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/wallet_trades_tokens_response"
+                                }
+                            }
+                        },
+                        "description": "Wallet trade history successfully returned"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "406": {
+                        "$ref": "#/components/responses/406"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Trade history (tokens)",
+                "tags": [
+                    "Wallet \u00bb Portfolio"
+                ]
+            }
+        },
+        "/wallet/value/trended": {
+            "get": {
+                "description": "Get historical trended value of an address in 4hr intervals. \nThis includes the value of all tokens, NFTs, LP/farm positions, custodial staking, and assets involved in active loans (either being lent or used as collateral).\n**NOTE** this does not include staking rewards unless the rewards are withdrew from rewards account.\n",
+                "parameters": [
+                    {
+                        "description": "Address to query for",
+                        "in": "query",
+                        "name": "address",
+                        "required": true,
+                        "schema": {
+                            "example": "stake1u8rphunzxm9lr4m688peqmnthmap35yt38rgvaqgsk5jcrqdr2vuc",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The time interval. Options are `24h`, `7d`, `30d`, `90d`, `180d`, `1y`, `all`. Defaults to `30d`.",
+                        "in": "query",
+                        "name": "timeframe",
+                        "required": false,
+                        "schema": {
+                            "example": "30d",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Quote currency to use (ADA, USD, EUR, ETH, BTC). Default is `ADA`.",
+                        "in": "query",
+                        "name": "quote",
+                        "required": false,
+                        "schema": {
+                            "example": "ADA",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/portfolio_value_trended_response"
+                                }
+                            }
+                        },
+                        "description": "Portfolio trended value successfully returned"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "406": {
+                        "$ref": "#/components/responses/406"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "summary": "Portfolio trended value",
+                "tags": [
+                    "Wallet \u00bb Portfolio"
+                ]
+            }
+        }
+    }
+}
