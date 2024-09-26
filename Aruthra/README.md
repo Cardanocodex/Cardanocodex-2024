@@ -16,7 +16,7 @@ DeFi platforms, while promising, often pose a steep learning curve for new users
 [Watch the demo video](/Aruthra/demo.mp4)
 
 # PPT Presentation
-[Download](/Aruthra/Anytime DeFi Teller AI.pptx)
+[Download]("/Aruthra/Anytime DeFi Teller AI.pptx")
 
 # Team
 - **Aruthra S**
